@@ -1,0 +1,202 @@
+<html>
+<head>
+		<script>
+				var c;
+			  var mx,my,mb=0;
+				var boxes=[];
+				var curr=-1;
+			
+				// Tile parameters
+				const xoffsX=75;
+				const xoffsY=43;
+				const yoffsX=-26;
+				const yoffsY=58;
+			
+				function setup()
+				{
+						var cc = document.getElementById("myCanvas");
+				    c = cc.getContext("2d");
+					
+						for(var i=0;i<8;i++){
+								for(var j=0;j<5;j++){
+										boxes.push({x1:50+(i*100),y1:50+(j*100),x2:150+(i*100),y2:150+(j*100),v:0.5});
+								}
+						}
+					
+						setInterval(updatestate,20);
+					
+						drawit();
+				}
+								
+				function updatestate()
+				{
+						curr=-1;
+						for(var i=0;i<boxes.length;i++){
+								var item=boxes[i];
+								if(mx>item.x1&&mx<item.x2&&my>item.y1&&my<item.y2){
+										item.v+=0.02;
+										if(item.v>0.7) item.v=0.7;
+										curr=i;
+								}else{
+										item.v-=0.02;
+										if(item.v<0.4) item.v=0.4;
+								}
+						}
+				}
+			
+				function mouseUp(e)
+				{
+						if(mb==1){
+								alert("du klickade i "+curr);
+						}
+						
+						mb=0;
+				}
+			
+				function mouseDown(e)
+				{
+						mb=e.which;
+				}
+			
+				function mouseMove(e,t)
+				{
+						var rect = e.target.getBoundingClientRect();
+            mx = e.clientX - rect.left; //x position within the element.
+            my = e.clientY - rect.top;  //y position within the element
+				}
+			
+				function drawit()
+				{	
+						c.clearRect(0,0,900,900);
+					
+						c.font="20px Arial Narrow";
+						c.fillText("Mb:"+mb,100,50);
+					
+						c.beginPath();
+						c.moveTo(0,0);
+						c.lineTo(mx,my);
+						c.stroke();
+					
+						for(var j=0;j<8;j++){
+								for(var i=2;i<8;i++){
+										hex(i,j);
+										innerhex(i,j);
+								}
+						}
+					
+						window.requestAnimationFrame(drawit);
+				} 			
+			
+				function hex(x,y)
+				{
+						c.globalAlpha=1.0;
+
+						c.save();
+					
+						// Isometric ratio
+						c.translate((x*75)+(y*-26),(x*43)+(y*58));
+						
+						c.fillStyle='#BE1E2D';
+						c.strokeStyle='#000000';
+						c.beginPath();
+						c.moveTo(16,34);
+						c.lineTo(-43,24.8);
+						c.lineTo(-59,-9.3);
+						c.lineTo(-16,-34.1);
+						c.lineTo(43,-24.9);
+						c.lineTo(59,9.2);
+						c.lineTo(16,34);
+						c.fill();
+//						c.stroke();
+					
+						c.restore();
+				}
+			
+				function drawRect(P1,P2,P3,P4)
+				{
+						
+				}
+			
+				function drawHex(P1,P2,P3,P4,P5,P6)
+				{
+						c.beginPath();
+						c.moveTo(P1.x,P1.y);
+						c.lineTo(P2.x,P2.y);
+						c.lineTo(P3.x,P3.y);
+						c.lineTo(P4.x,P4.y);
+						c.lineTo(P5.x,P5.y);
+						c.lineTo(P6.x,P6.y);
+						c.lineTo(P1.x,P1.y);
+						c.fill();
+						c.stroke();				
+				}
+			
+				function cross(xk,yk)
+				{
+						const offs=70;
+						c.lineWidth=3.0;
+						c.strokeStyle="#f53";
+						
+						c.beginPath();
+						c.moveTo(xk-offs,yk-offs);
+						c.lineTo(xk+offs,yk+offs);
+						c.moveTo(xk+offs,yk-offs);
+						c.lineTo(xk-offs,yk+offs);
+						c.stroke();
+					
+						c.lineWidth=1.0;
+				}
+			
+				function innerhex(x,y)
+				{
+						c.globalAlpha=1.0;
+
+						c.save();
+					
+						// Isometric ratio
+						c.translate((x*75)+(y*-26),(x*43)+(y*58));
+					
+						c.fillStyle='#FFF200';
+						c.strokeStyle='#000000';
+					
+						/*
+						P1o={x:16,y:34};
+						P2o={x:-43,y:24.8};
+						P3o={x:-59,y:-9.3};
+						P4o={x:-16,y:-34.1};
+						P5o={x:43,y:-24.9};
+						P6o={x:59,y:9.2};
+						*/
+					
+						P1i={x:12.3,y:26.2};
+						P2i={x:-33,y:19.1};
+						P3i={x:-45.3,y:-7.1};
+						P4i={x:-12.3,y:-26.2};
+						P5i={x:33.1,y:-19.1};
+						P6i={x:45.4,y:7.1};
+					
+					
+	//					drawHex(P1o,P2o,P3o,P4o,P5o,P6o);
+						drawHex(P1i,P2i,P3i,P4i,P5i,P6i);					
+					
+/*					
+						// Inner
+						c.beginPath();
+						c.moveTo(-45.3,-7.1);
+						c.lineTo(-12.3,-26.2);
+						c.lineTo(33.1,-19.1);
+						c.lineTo(45.4,7.1);
+						c.lineTo(12.3,26.2);
+						c.lineTo(-33,19.1);
+						c.lineTo(-45.3,-7.1);
+						c.fill();
+						c.stroke();
+*/					
+						c.restore();
+				}
+
+		</script>
+</head>
+<body onload="setup();">
+ 	<canvas id="myCanvas" onmousedown="mouseDown(event);" onmouseup="mouseUp(event);" onmousemove="mouseMove(event,this);" width="900" height="900" style="border:1px solid #000000;"></canvas> 
+</body>
