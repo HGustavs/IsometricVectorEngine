@@ -183,14 +183,22 @@
 					
 					
 						P3n={x:P3.x+xoffsX,y:P3.y+xoffsY};
-						P4n={x:P4.x+xoffsX,y:P4.y+xoffsY};					
+						P4n={x:P4.x+xoffsX,y:P4.y+xoffsY};
+					
+						P4o={x:P4.x+yoffsX,y:P4.y+yoffsY};
+						P5o={x:P5.x+yoffsX,y:P5.y+yoffsY};
+					
+						P5p={x:P5.x+yoffsX-xoffsX,y:P5.y+yoffsY-xoffsY};
+						P6p={x:P6.x+yoffsX-xoffsX,y:P6.y+yoffsY-xoffsY};
 					
 	//					drawHex(P1o,P2o,P3o,P4o,P5o,P6o);
 						drawHex(P1,P2,P3,P4,P5,P6);					
 					
 						drawRect(P1,P3n,P4n,P6);
+						drawRect(P1,P2,P4o,P5o);
+						drawRect(P2,P3,P5p,P6p);					
 					
-						drawCross(P1.x,P1.y);
+						drawCross(P6.x+yoffsX-xoffsX,P6.y+yoffsY-xoffsY);
 						//drawCross(P3i.x,P3i.y);
 						// drawCross(P4i.x+xoffsX,P4i.y+xoffsY);
 						//drawCross(P4i.x+xoffsX,P4i.y+xoffsY);
