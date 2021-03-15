@@ -79,7 +79,6 @@
 					
 						for(var j=0;j<8;j++){
 								for(var i=2;i<8;i++){
-										hex(i,j);
 										innerhex(i,j);
 								}
 						}
@@ -114,7 +113,14 @@
 			
 				function drawRect(P1,P2,P3,P4)
 				{
-						
+						c.beginPath();
+						c.moveTo(P1.x,P1.y);
+						c.lineTo(P2.x,P2.y);
+						c.lineTo(P3.x,P3.y);
+						c.lineTo(P4.x,P4.y);
+						c.closePath();
+						c.fill();
+						c.stroke();						
 				}
 			
 				function drawHex(P1,P2,P3,P4,P5,P6)
@@ -131,9 +137,9 @@
 						c.stroke();				
 				}
 			
-				function cross(xk,yk)
+				function drawCross(xk,yk)
 				{
-						const offs=70;
+						const offs=7;
 						c.lineWidth=3.0;
 						c.strokeStyle="#f53";
 						
@@ -154,7 +160,7 @@
 						c.save();
 					
 						// Isometric ratio
-						c.translate((x*75)+(y*-26),(x*43)+(y*58));
+						c.translate((x*xoffsX)+(y*yoffsX),(x*xoffsY)+(y*yoffsY));
 					
 						c.fillStyle='#FFF200';
 						c.strokeStyle='#000000';
@@ -168,30 +174,27 @@
 						P6o={x:59,y:9.2};
 						*/
 					
-						P1i={x:12.3,y:26.2};
-						P2i={x:-33,y:19.1};
-						P3i={x:-45.3,y:-7.1};
-						P4i={x:-12.3,y:-26.2};
-						P5i={x:33.1,y:-19.1};
-						P6i={x:45.4,y:7.1};
+						P1={x:12.3,y:26.2};
+						P2={x:-33,y:19.1};
+						P3={x:-45.3,y:-7.1};
+						P4={x:-12.3,y:-26.2};
+						P5={x:33.1,y:-19.1};
+						P6={x:45.4,y:7.1};
 					
+					
+						P3n={x:P3.x+xoffsX,y:P3.y+xoffsY};
+						P4n={x:P4.x+xoffsX,y:P4.y+xoffsY};					
 					
 	//					drawHex(P1o,P2o,P3o,P4o,P5o,P6o);
-						drawHex(P1i,P2i,P3i,P4i,P5i,P6i);					
+						drawHex(P1,P2,P3,P4,P5,P6);					
 					
-/*					
-						// Inner
-						c.beginPath();
-						c.moveTo(-45.3,-7.1);
-						c.lineTo(-12.3,-26.2);
-						c.lineTo(33.1,-19.1);
-						c.lineTo(45.4,7.1);
-						c.lineTo(12.3,26.2);
-						c.lineTo(-33,19.1);
-						c.lineTo(-45.3,-7.1);
-						c.fill();
-						c.stroke();
-*/					
+						drawRect(P1,P3n,P4n,P6);
+					
+						drawCross(P1.x,P1.y);
+						//drawCross(P3i.x,P3i.y);
+						// drawCross(P4i.x+xoffsX,P4i.y+xoffsY);
+						//drawCross(P4i.x+xoffsX,P4i.y+xoffsY);
+					
 						c.restore();
 				}
 
