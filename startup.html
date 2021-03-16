@@ -132,7 +132,18 @@
 						c.lineTo(P4.x,P4.y);
 						c.lineTo(P5.x,P5.y);
 						c.lineTo(P6.x,P6.y);
-						c.lineTo(P1.x,P1.y);
+						c.closePath();
+						c.fill();
+						c.stroke();				
+				}
+			
+				function drawTriangle(P1,P2,P3)
+				{
+						c.beginPath();
+						c.moveTo(P1.x,P1.y);
+						c.lineTo(P2.x,P2.y);
+						c.lineTo(P3.x,P3.y);
+						c.closePath();
 						c.fill();
 						c.stroke();				
 				}
@@ -196,9 +207,13 @@
 					
 						drawRect(P1,P3n,P4n,P6);
 						drawRect(P1,P2,P4o,P5o);
-						drawRect(P2,P3,P5p,P6p);					
+						drawRect(P2,P3,P5p,P6p);	
 					
-						drawCross(P6.x+yoffsX-xoffsX,P6.y+yoffsY-xoffsY);
+						drawTriangle(P5o,P3n,P1);
+						drawTriangle(P2,P4o,P6p);					
+					
+						// P6p, P5p
+						drawCross(P6p.x,P6p.y);
 						//drawCross(P3i.x,P3i.y);
 						// drawCross(P4i.x+xoffsX,P4i.y+xoffsY);
 						//drawCross(P4i.x+xoffsX,P4i.y+xoffsY);
