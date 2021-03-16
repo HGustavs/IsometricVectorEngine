@@ -175,23 +175,13 @@
 					
 						c.fillStyle='#FFF200';
 						c.strokeStyle='#000000';
-					
-						/*
-						P1o={x:16,y:34};
-						P2o={x:-43,y:24.8};
-						P3o={x:-59,y:-9.3};
-						P4o={x:-16,y:-34.1};
-						P5o={x:43,y:-24.9};
-						P6o={x:59,y:9.2};
-						*/
-					
+										
 						P1={x:12.3,y:26.2};
 						P2={x:-33,y:19.1};
 						P3={x:-45.3,y:-7.1};
 						P4={x:-12.3,y:-26.2};
 						P5={x:33.1,y:-19.1};
 						P6={x:45.4,y:7.1};
-					
 					
 						P3n={x:P3.x+xoffsX,y:P3.y+xoffsY};
 						P4n={x:P4.x+xoffsX,y:P4.y+xoffsY};
@@ -202,7 +192,6 @@
 						P5p={x:P5.x+yoffsX-xoffsX,y:P5.y+yoffsY-xoffsY};
 						P6p={x:P6.x+yoffsX-xoffsX,y:P6.y+yoffsY-xoffsY};
 					
-	//					drawHex(P1o,P2o,P3o,P4o,P5o,P6o);
 						drawHex(P1,P2,P3,P4,P5,P6);					
 					
 						drawRect(P1,P3n,P4n,P6);
@@ -212,11 +201,7 @@
 						drawTriangle(P5o,P3n,P1);
 						drawTriangle(P2,P4o,P6p);					
 					
-						// P6p, P5p
 						drawCross(P6p.x,P6p.y);
-						//drawCross(P3i.x,P3i.y);
-						// drawCross(P4i.x+xoffsX,P4i.y+xoffsY);
-						//drawCross(P4i.x+xoffsX,P4i.y+xoffsY);
 					
 						c.restore();
 				}
